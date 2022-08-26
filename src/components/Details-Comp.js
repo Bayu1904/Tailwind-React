@@ -25,7 +25,7 @@ import Lazada from "../Assets/img/e-com/lazada.png";
 export default function DetailComp() {
   return (
     <div className="md:mb-0 -mb-pages2">
-      <div className="grid grid-cols-2 gap-2 w-3/4 m-auto my-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 w-3/4 m-auto my-3">
         <div className="w-full h-conten">
           <Carousel className="h-96" slideInterval={10000}>
             <div className="relative">

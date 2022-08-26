@@ -1,4 +1,6 @@
 import React from "react";
+
+import { Link } from "react-router-dom";
 import Smartphone from "../Assets/img/banner.jpg";
 import Tablet from "../Assets/img/Banner-1.jpg";
 import Lainnya from "../Assets/img/banner-2.jpg";
@@ -18,7 +20,7 @@ export default function Navbar() {
               href=""
               className="bg-slate-100 z-10 mt-6 py-3 px-5 hover:bg-pink-700 hover:text-white text-xs ease-in duration-300"
             >
-              SMARTPHONE
+              <Link to="/ListProduct">SMARTPHONE</Link>
             </a>
           </div>
         </div>
