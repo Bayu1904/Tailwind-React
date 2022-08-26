@@ -18,6 +18,11 @@ module.exports = {
       },
       margin: {
         pages: "46rem",
+        pages1: "41rem",
+        pages2: "26rem",
+      },
+      textUnderlineOffset: {
+        3: "6px",
       },
     },
   },
