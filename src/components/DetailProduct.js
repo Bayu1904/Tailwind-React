@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import Aos from "aos";
-
 import Foto1 from "../Assets/img/1.jpg";
 import Foto2 from "../Assets/img/2.jpg";
 import Foto3 from "../Assets/img/3.jpg";
-
 import "aos/dist/aos.css";
 
 export default function DetailProduct() {

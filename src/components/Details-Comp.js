@@ -1,20 +1,22 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import { API } from "../config/api";
+import { useParams } from "react-router-dom";
+import Aos from "aos";
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Carousel } from "flowbite-react/lib/esm/components";
+import { Pagination, Navigation } from "swiper";
 
 // Import Swiper styles
 import "swiper/css";
+import "aos/dist/aos.css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-// import required modules
-import { Pagination, Navigation } from "swiper";
-
 import Card from "../components/Card-Product";
 import Spek from "../components/Spek";
-import foto from "../Assets/img/HP/G5-Elite-1.jpg";
-import foto2 from "../Assets/img/HP/G5-Elite-2.jpg";
 import Tokopedia from "../Assets/img/e-com/tokopedia.png";
 import Shopee from "../Assets/img/e-com/shopee.png";
 import JD from "../Assets/img/e-com/jd.png";
@@ -23,38 +25,62 @@ import Blibli from "../Assets/img/e-com/blilbli.png";
 import Lazada from "../Assets/img/e-com/lazada.png";
 
 export default function DetailComp() {
+  const numberFormat = (value) =>
+    new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+    }).format(value);
+
+  let { id } = useParams();
+  let { data: products } = useQuery("productsCache", async () => {
+    const response = await API.get("/Merk");
+    return response.data;
+  });
+
+  let { data: product } = useQuery("productCache", async () => {
+    const response = await API.get("/Merk/" + id);
+    return response.data;
+  });
+
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
+
   return (
     <div className="md:mb-0 -mb-pages2">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 w-3/4 m-auto my-3">
         <div className="w-full h-conten">
           <Carousel className="h-96" slideInterval={10000}>
             <div className="relative">
-              <div className="bg-red-700 text-white text-xs font-normal absolute py-3 px-2 top-4 left-20 rounded-full">
+              <div className="bg-red-700 z-10 text-white text-xs font-normal absolute py-3 px-2 top-4 left-20 rounded-full">
                 SALE
               </div>
-              <img src={foto} alt="Banner-1" className="m-auto" />
+              <img
+                data-aos="fade-up"
+                src={product?.image1[0]?.url}
+                alt="Banner-1"
+                className="m-auto"
+              />
             </div>
             <div className="relative">
               <div className="bg-red-700 text-white text-xs font-normal absolute py-3 px-2 top-4 left-20 rounded-full">
                 SALE
               </div>
-              <img src={foto2} alt="Banner-1" className="m-auto" />
+              <img
+                src={product?.image2[0]?.url}
+                alt="Banner-1"
+                className="m-auto"
+              />
             </div>
           </Carousel>
         </div>
         <div className="p-6 overflow-auto">
-          <h1 className="text-3xl font-semibold">
-            Advan SmartPhone G5 Elite 3/16
-          </h1>
-          <div className="text-xl py-2 font-light text-red-600">Rp 984.000</div>
-          <p className="text-lg mb-10">
-            di seluruh pelosok Indonesia, kini Advan menghadirkan G5 Elite
-            dengan RAM 3 GB dan internal 16 GB didukung baterai 3000 mAh dan
-            quadcore 1.4 GHz untuk mendukung performa Anda di mana saja. Nikmati
-            tampilan menawan dari layar HD+ dengan IPS 2.5D glass yang kokoh dan
-            kamera 5MP yang dilengkapi flash light.
-          </p>
-          <div className="grid grid-cols-3 w-56 gap-6 mb-12">
+          <h1 className="text-3xl font-semibold">{product?.title}</h1>
+          <div className="text-xl py-2 font-light text-red-600">
+            {numberFormat(product?.price)}
+          </div>
+          <p className="text-lg mb-10">{product?.desc}</p>
+          <div data-aos="fade-up" className="grid grid-cols-3 w-56 gap-6 mb-12">
             <div>
               <img src={Tokopedia} alt="" />
             </div>
@@ -97,18 +123,11 @@ export default function DetailComp() {
           modules={[Pagination, Navigation]}
           className="mySwiper"
         >
-          <SwiperSlide>
-            <Card />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Card />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Card />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Card />
-          </SwiperSlide>
+          {products?.map((item, index) => (
+            <SwiperSlide>
+              <Card item={item} key={index} />
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </div>

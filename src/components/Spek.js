@@ -11,9 +11,17 @@ export default function Spek() {
       <h1 className="pt-3 font-semibold text-2xl ">Spesifikasi</h1>
       <p className="pt-2 pb-8 text-gray-500">IMEI Terdaftar resmi</p>
       <table className="w-full table-auto m-auto">
-        <tr className="w-full">
-          <td className="px-auto text-gray-500 pr-9">OS</td>
-          <td className="text-gray-500">: 120910291202</td>
+        <tr className="w-full mb-5 ">
+          <td className="py-3 text-gray-500 pr-9">OS</td>
+          <td className="text-gray-500 py-3">: 120910291202</td>
+        </tr>
+        <tr className="w-full mb-5 ">
+          <td className="py-3 text-gray-500 pr-9">OS</td>
+          <td className="text-gray-500 py-3">: 120910291202</td>
+        </tr>
+        <tr className="w-full mb-5 ">
+          <td className="py-3 text-gray-500 pr-9">OS</td>
+          <td className="text-gray-500 py-3">: 120910291202</td>
         </tr>
       </table>
     </div>

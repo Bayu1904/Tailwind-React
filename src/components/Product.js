@@ -1,9 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Aos from "aos";
+import { useQuery } from "react-query";
+import { API } from "../config/api";
+
 import foto from "../Assets/img/HP/G5-Elite-1.jpg";
 import foto2 from "../Assets/img/HP/G5-Elite-2.jpg";
 
+import "aos/dist/aos.css";
+import CardProduct from "./Card-Product";
+
 export default function Product() {
+  let { data: products } = useQuery("productsCache", async () => {
+    const response = await API.get("/Merk");
+    return response.data;
+  });
+
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
+
   const [img, setImg] = useState(false);
   const handleShownImg = () => {
     setImg(!img);
@@ -28,25 +44,9 @@ export default function Product() {
       </div>
 
       <div className="col-span-2 py-4 grid md:grid-cols-3 grid-cols-1 gap-5 h-auto">
-        <Link to="/Detail">
-          <div
-            className="h-96 text-center cursor-pointer transition-all duration-500 relative"
-            onMouseEnter={handleShownImg}
-            onMouseOut={handleShownImg}
-          >
-            <div className="bg-red-700 text-white text-xs font-normal absolute py-3 px-2 top-4 left-4 rounded-full">
-              SALE
-            </div>
-            {img ? (
-              <img src={foto} alt="" className="w-full inline" />
-            ) : (
-              <img src={foto2} alt="" className="w-full inline" />
-            )}
-            <p className="font-thin mt-4"> Smartphone</p>
-            <p className="font-bold"> Advan Smartphone G5 Elite 3/16GB</p>
-            <p className="font-light text-red-500"> Rp. 985.000</p>
-          </div>
-        </Link>
+        {products?.map((item, index) => (
+          <CardProduct item={item} key={index} />
+        ))}
       </div>
     </div>
   );
