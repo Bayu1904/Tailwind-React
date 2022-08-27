@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import Aos from "aos";
+
 import Foto1 from "../Assets/img/1.jpg";
 import Foto2 from "../Assets/img/2.jpg";
 import Foto3 from "../Assets/img/3.jpg";
 
+import "aos/dist/aos.css";
+
 export default function DetailProduct() {
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
   return (
     <div className="container mt-80 xl:mt-44">
       <div className="xl:text-2xl md:text-lg uppercase font-bold bg-gray-200 mb-12 text-center">
@@ -13,7 +20,10 @@ export default function DetailProduct() {
       </div>
       <div>
         <div className="w-3/4 m-auto grid xl:grid-cols-3 grid-cols-1 gap-3 h-conten">
-          <div className="row-span-2  w-full md:h-conten h-96 overflow-hidden">
+          <div
+            data-aos="fade-right"
+            className="row-span-2  w-full md:h-conten h-96 overflow-hidden"
+          >
             <img
               src={Foto1}
               alt=""
@@ -27,7 +37,10 @@ export default function DetailProduct() {
               className="object-contain hover:scale-110 ease-linear duration-300 inline"
             />
           </div>
-          <div className="row-span-2  w-full md:h-conten h-96  overflow-hidden">
+          <div
+            data-aos="fade-left"
+            className="row-span-2  w-full md:h-conten h-96  overflow-hidden"
+          >
             <img
               src={Foto3}
               alt=""

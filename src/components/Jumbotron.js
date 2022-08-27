@@ -6,7 +6,7 @@ import Brand2 from "../Assets/img/Brand-2.PNG";
 
 export default function Jumbotron() {
   return (
-    <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
+    <div className="h-56 md:h-64 xl:h-conten xl:-mt-14 -mt-10 ">
       <Carousel className="h-96" slideInterval={8000}>
         <img src={Brand} alt="Banner-1" />
         <img src={Brand2} alt="Banner" />

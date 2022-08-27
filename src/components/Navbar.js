@@ -13,7 +13,7 @@ export default function Navbar() {
     setNav(!nav);
   };
   return (
-    <nav className="py-4 px-5  sticky top-0 z-10 bg-white flex justify-between md:justify-center">
+    <nav className="py-4 px-5  sticky top-0 z-10 flex justify-between md:justify-center">
       <div className="flex justify-center">
         <ul className="m-auto hidden md:flex justify-center">
           <Dropdown label="Product" inline={true}>
